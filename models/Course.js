@@ -55,22 +55,22 @@ CourseSchema.statics.getAverageCost = async function(bootcampId) {
         averageCost: { $avg: '$tuition' }
       }
     }
-  ]);
+  ])
 
   try {
     if (obj[0]) {
       await this.model("Bootcamp").findByIdAndUpdate(bootcampid, {
         averageCost:Math.ceil(obj[0].averageCost / 10) * 10,
-      });
+      })
     } else {
       await this.model("Bootcamp").findByIdAndUpdate(bootcampid, {
         averageCost: undefined,
-      });
+      })
     }
   } catch (err) {
     console.error(err);
   }
-};
+}
 
 // Call getAverageCost after save
 CourseSchema.post('save', async function() {
