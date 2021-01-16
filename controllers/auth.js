@@ -30,11 +30,11 @@ exports.register = asyncHandler(async (req, res, next) => {
 
   user.save({ validateBeforeSave: false });
 
-  const sendResult = await sendEmail({
-    email: user.email,
-    subject: 'Email confirmation token',
-    message,
-  });
+  // const sendResult = await sendEmail({
+  //   email: user.email,
+  //   subject: 'Email confirmation token',
+  //   message,
+  // });
 
   sendTokenResponse(user, 200, res);
 });
@@ -45,7 +45,7 @@ exports.register = asyncHandler(async (req, res, next) => {
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
-  // Validate emil & password
+  // Validate email & password
   if (!email || !password) {
     return next(new ErrorResponse('Please provide an email and password', 400));
   }
